@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Card Creator</title>
+  <style>
+    #cardCanvas {
+      max-width: 50vw;
+            font-family: "Arial Black", Arial, sans-serif;
+    }
+  </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan&display=swap">
+</head>
+<body>
+  <form id="cardForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+    <br>
+    <label for="cardNumber">Card Number:</label>
+    <input type="text" id="cardNumber" required>
+    <br>
+    <label for="expiryDate">Expiry Date:</label>
+    <input type="date" id="expiryDate" required>
+    <br>
+    <button type="submit">Generate Card</button>
+  </form>
+  <a id="downloadLink" download="card.jpg" style="display: none;"></a>
+  <canvas id="cardCanvas" width="1600" height="900"></canvas>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('cardForm');
+  var canvas = document.getElementById('cardCanvas');
+  var ctx = canvas.getContext('2d');
+  var downloadLink = document.getElementById('downloadLink');
+
+  // Load the card image
+  var cardImage = new Image();
+  cardImage.src = 'template.jpg';
+
+  cardImage.onload = function() {
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw the card image
+      var maxWidth = canvas.width * 0.9;
+      var scale = Math.min(maxWidth / cardImage.width, 1);
+      var imageWidth = cardImage.width * scale;
+      var imageHeight = cardImage.height * scale;
+      ctx.drawImage(cardImage, 0, 0, imageWidth, imageHeight);
+
+      // Set the text properties
+      ctx.font = '60px "League Spartan"';
+      ctx.fillStyle = 'blue';
+
+      // Get the form inputs
+      var nameInput = document.getElementById('name');
+      var cardNumberInput = document.getElementById('cardNumber');
+      var expiryDateInput = document.getElementById('expiryDate');
+
+      // Set the name and card numbers
+      var name = nameInput.value;
+      var cardNumber = cardNumberInput.value;
+
+      ctx.fillText(name, 40, 645);
+      ctx.fillText(cardNumber, 40, 715);
+
+      // Set the expiry date
+var expiryDate = expiryDateInput.value;
+if (!expiryDate) {
+    var today = new Date();
+    var nextYear = today.getFullYear() + 1;
+    var day = ('0' + today.getDate()).slice(-2);
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var year = nextYear.toString();
+    expiryDate = day + '/' + month + '/' + year;
+    expiryDateInput.value = expiryDate;
+}
+      var validTillText = 'Valid Till: ' + expiryDate;
+      ctx.fillText(validTillText, 40, 780);
+
+      // Enable image download on click
+      canvas.addEventListener('click', function() {
+        downloadLink.href = canvas.toDataURL('image/jpeg');
+        downloadLink.click();
+      });
+    });
+  };
+
+
+  // Set the default expiry date to today's date
+  var today = new Date();
+  var formattedDate = today.toISOString().slice(0, 10);
+  var expiryDateInput = document.getElementById('expiryDate');
+  expiryDateInput.value = formattedDate;
+
+  // Set the default expiry date to today's date + 1 year
+  today.setFullYear(today.getFullYear() + 1);
+  var nextYearFormattedDate = today.toISOString().slice(0, 10);
+  expiryDateInput.value = nextYearFormattedDate;
+});
+  document.addEventListener('DOMContentLoaded', function() {
+    var canvas = document.getElementById('cardCanvas');
+    var downloadLink = document.getElementById('downloadLink');
+
+    canvas.addEventListener('click', function() {
+      downloadLink.href = canvas.toDataURL('image/jpeg');
+      downloadLink.click();
+    });
+  });
+  </script>
+</body>
+</html>

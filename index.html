@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>1Rupee Clinic Linktree</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* Prevent scroll */
+    }
+    
+    .header {
+      background-color: #f7f7f7;
+      padding: 20px;
+      text-align: center;
+      height: 75px; /* Set logo container height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .logo {
+      height: 70px; /* Set logo height */
+      width: auto; /* Automatically adjust width */
+    }
+    
+    .buttons-container {
+      display: flex;
+      flex-direction: column; /* Place buttons one below the other */
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 80px); /* Calculate remaining area */
+    }
+    
+    .button {
+      display: inline-block;
+      margin: 10px;
+      padding: 15px 30px;
+      background-color: #3498db;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow transition */
+    }
+    
+    .button:hover {
+      background-color: #2980b9;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add box-shadow on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img class="logo" src="1rupee_clinic_logo.png" alt="1Rupee Clinic Logo">
+  </div>
+  
+  <div class="buttons-container">
+    <a class="button" href="card.html">
+      <img src="card.webp" alt="Card Icon" width="20" height="20">
+      Card
+    </a>
+    
+    <a class="button" href="test.html">
+      <img src="test.webp" alt="Test Icon" width="20" height="20">
+      Test
+    </a>
+    
+    <a class="button" href="pay.html">
+      <img src="pay.webp" alt="Pay Icon" width="20" height="20">
+      Pay
+    </a>
+  </div>
+</body>
+</html>
